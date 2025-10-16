@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/api.js';
-import NavbarOperador from '../Components/NavbarOperador';
+import NavbarOperador from '../components/NavbarOperador';
 
 const accionesOpciones = [
     'Todas las acciones',
