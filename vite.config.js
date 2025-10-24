@@ -1,16 +1,17 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Detecta si está en modo producción usando las variables de Vite
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [react()],
-  base: mode === 'production' ? '/bancodemo/' : '/',
+  base: process.env.VITE_ENV === 'production' ? '/bancodemo/' : '/',
   server: {
-    host: '0.0.0.0', // accesible desde fuera del contenedor
+    host: '0.0.0.0',
     port: 5173,
-    allowedHosts: [
-      'oscarpalomino.dev',
-      'www.oscarpalomino.dev'
-    ],
+    allowedHosts: ['oscarpalomino.dev', 'localhost', '127.0.0.1'],
   },
-}))
+  preview: {
+    host: '0.0.0.0',
+    port: 5173,
+    allowedHosts: ['oscarpalomino.dev', 'localhost', '127.0.0.1'],
+  },
+})
