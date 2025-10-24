@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:8000/api/';
+const isDocker = window.location.hostname !== 'localhost';
+
+const BASE_URL = isDocker
+  ? 'http://bancodemo_backend:8000/api/'
+  : 'http://localhost:8000/api/';
 
 // Crear instancia de Axios
 const api = axios.create({
