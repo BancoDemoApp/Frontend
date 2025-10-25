@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // Detecta entorno sin usar process directamente
-const isProduction = (import.meta.env.MODE === 'production')
+const isProduction = (import.meta.env.NODE_ENV === 'production')
 
 export default defineConfig({
   plugins: [react()],
