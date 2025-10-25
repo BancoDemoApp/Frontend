@@ -4,8 +4,11 @@ export default function PrivateRoute({ children, tipoPermitido }) {
     const access = localStorage.getItem('access');
     const tipo = localStorage.getItem('tipo');
 
+    // Base dinámico según entorno
+    const base = import.meta.env.MODE === 'production' ? '/bancodemo' : '';
+
     if (!access) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to={`${base}/login`} replace />;
     }
 
     // Soporta un string o un array como tipoPermitido
@@ -14,7 +17,7 @@ export default function PrivateRoute({ children, tipoPermitido }) {
         : tipo === tipoPermitido;
 
     if (!esPermitido) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to={`${base}/login`} replace />;
     }
 
     return children;

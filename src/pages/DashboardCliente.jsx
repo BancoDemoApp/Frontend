@@ -8,6 +8,9 @@ export default function DashboardCliente() {
     const [cuentas, setCuentas] = useState([]);
     const [transacciones, setTransacciones] = useState([]);
 
+    // Base dinámico según entorno
+    const base = import.meta.env.MODE === 'production' ? '/bancodemo' : '';
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -45,7 +48,8 @@ export default function DashboardCliente() {
                 <section className="transactions">
                     <div className="section-header">
                         <h3>Transacciones Recientes</h3>
-                        <a href="/historial">Ver todas</a>
+                        {/* Ajuste dinámico del enlace según entorno */}
+                        <a href={`${base}/historial`}>Ver todas</a>
                     </div>
 
                     {transacciones.map((tx) => (

@@ -7,6 +7,9 @@ export default function DashboardOperador() {
     const [resumen, setResumen] = useState({ total:0, depositos:0, retiros:0 });
     const nombre = localStorage.getItem('nombre');
 
+    // Base dinámico según entorno
+    const base = import.meta.env.MODE === 'production' ? '/bancodemo' : '';
+
     useEffect(() => {
         async function fetch() {
             try {
@@ -54,7 +57,8 @@ export default function DashboardOperador() {
                 <section className="transacciones">
                     <div className="trans-header">
                         <h2>Transacciones Recientes</h2>
-                        <a href="/operador/logs">Ver todas</a>
+                        {/* Ajuste dinámico del enlace */}
+                        <a href={`${base}/operador/logs`}>Ver todas</a>
                     </div>
                     <ul className="lista-transacciones">
                         {trans.map(t => (
