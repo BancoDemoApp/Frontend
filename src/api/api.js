@@ -1,19 +1,11 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:8000/api/';
-
-// Detectar entorno
-const isLocal = window.location.hostname === 'localhost';
-
-const BASE_URL = isLocal
-  ? 'https://localhost:8000/api/'
-  : API_URL; // 🔹 Peticiones HTTPS en producción a través de Nginx
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/';
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: API_URL,
 });
 
-// Interceptor para token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access');
   if (token) {
