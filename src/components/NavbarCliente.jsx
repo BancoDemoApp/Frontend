@@ -7,7 +7,7 @@ export default function NavbarCliente() {
     const nombre = localStorage.getItem('nombre') || 'Cliente';
 
     // Base para rutas según entorno
-    const base = import.meta.env.MODE === 'production' ? '/bancodemo' : '';
+    const base = import.meta.env.MODE;
 
     const handleLogout = async () => {
         try {
