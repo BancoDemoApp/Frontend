@@ -84,6 +84,16 @@ nav ul li a:hover {
     color: #fff;
 }
 
+#info figure {
+    width: 100%;
+    height: auto;
+}
+
+#info figure img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* Sección de características */
 #caracteristicas {
     text-align: center;
@@ -556,7 +566,7 @@ a:hover {
 /* 📱 Responsive Design */
 
 /* Tablets y pantallas medianas */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 849px) {
     nav {
         flex-direction: column;
         padding: 1rem 2rem;
@@ -571,6 +581,20 @@ a:hover {
     #info ul {
         flex-direction: column;
         gap: 1rem;
+    }
+
+    #info ul li {
+        margin-bottom: 20px;
+    }
+
+    #info figure {
+        width: 100%;
+        height: auto;
+    }
+
+    #info figure img {
+        max-width: 100%;
+        height: auto;
     }
 
     #caracteristicas {
@@ -594,6 +618,10 @@ a:hover {
     #action ul {
         flex-direction: column;
         gap: 1rem;
+    }
+
+    #action ul li {
+        margin-bottom: 20px;
     }
 
     .links-container {
