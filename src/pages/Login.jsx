@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { login } from '../api/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { FaUser, FaUsers, FaEye, FaEyeSlash } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 
@@ -114,7 +114,7 @@ export default function Login() {
                     </form>
 
                     <p>
-                        ¿No tienes una cuenta? <a href="/signup">Regístrate aquí</a>
+                        ¿No tienes una cuenta? <Link to="/signup">Regístrate aquí</Link>
                     </p>
                 </div>
             </section>

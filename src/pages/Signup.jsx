@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import api from '../api/api';
 import Navbar from '../components/Navbar';
 
@@ -136,21 +136,11 @@ export default function Signup() {
                         {/* Panel de requisitos */}
                         {form.password && (
                             <ul className="password-requirements">
-                                <li className={requisitos.longitud ? 'ok' : ''}>
-                                    ✅ Mínimo 8 caracteres
-                                </li>
-                                <li className={requisitos.minuscula ? 'ok' : ''}>
-                                    ✅ Al menos una letra minúscula
-                                </li>
-                                <li className={requisitos.mayuscula ? 'ok' : ''}>
-                                    ✅ Al menos una letra mayúscula
-                                </li>
-                                <li className={requisitos.numero ? 'ok' : ''}>
-                                    ✅ Al menos un número
-                                </li>
-                                <li className={requisitos.especial ? 'ok' : ''}>
-                                    ✅ Al menos un carácter especial
-                                </li>
+                                <li className={requisitos.longitud ? 'ok' : ''}>✅ Mínimo 8 caracteres</li>
+                                <li className={requisitos.minuscula ? 'ok' : ''}>✅ Al menos una letra minúscula</li>
+                                <li className={requisitos.mayuscula ? 'ok' : ''}>✅ Al menos una letra mayúscula</li>
+                                <li className={requisitos.numero ? 'ok' : ''}>✅ Al menos un número</li>
+                                <li className={requisitos.especial ? 'ok' : ''}>✅ Al menos un carácter especial</li>
                             </ul>
                         )}
 
@@ -175,11 +165,7 @@ export default function Signup() {
                         </div>
 
                         {form.confirmPassword && (
-                            <p
-                                className={
-                                    contrasenaCoincide ? 'match-ok' : 'match-error'
-                                }
-                            >
+                            <p className={contrasenaCoincide ? 'match-ok' : 'match-error'}>
                                 {contrasenaCoincide
                                     ? '✅ Las contraseñas coinciden'
                                     : '❌ Las contraseñas no coinciden'}
@@ -215,7 +201,7 @@ export default function Signup() {
                         <button type="submit">Regístrate</button>
 
                         <p className="login-link">
-                            ¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a>
+                            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
                         </p>
                     </form>
                 </div>
