@@ -1,4 +1,3 @@
-// src/pages/EditarPerfil.jsx
 import { useEffect, useState } from 'react';
 import NavbarWrapper from '../components/NavbarWrapper';
 import { obtenerPerfilCliente, actualizarPerfilCliente } from '../api/api';
@@ -35,7 +34,15 @@ export default function EditarPerfil() {
         try {
             await actualizarPerfilCliente(form);
             setMensaje('✅ Datos actualizados correctamente.');
-            setTimeout(() => navigate('/perfil'), 1500);
+
+            setTimeout(() => {
+                if (import.meta.env.MODE === 'production') {
+                    navigate('/bancodemo/perfil');
+                } else {
+                    navigate('/perfil');
+                }
+            }, 1500);
+
         } catch (error) {
             console.error('Error al actualizar perfil:', error);
             setMensaje('❌ No se pudo actualizar el perfil.');

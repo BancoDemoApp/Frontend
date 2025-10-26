@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../api/api';
 
 export default function NavbarCliente() {
+    const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const nombre = localStorage.getItem('nombre') || 'Cliente';
-
-    // Base para rutas según entorno
-    const base = import.meta.env.MODE;
 
     const handleLogout = async () => {
         try {
@@ -16,21 +14,27 @@ export default function NavbarCliente() {
             console.error('Error cerrando sesión:', error);
         } finally {
             localStorage.clear();
-            window.location.href = import.meta.env.MODE === 'production'
-            ? '/bancodemo/'
-            : '/';
+
+            // 🔹 En producción te lleva a /bancodemo/
+            // 🔹 En local, a la raíz "/"
+            if (import.meta.env.MODE === 'production') {
+                window.location.href = '/bancodemo/';
+            } else {
+                navigate('/');
+            }
         }
     };
 
     return (
         <header>
             <h1 className="logo">
-                <Link to={`${base}/dashboard`}>BancoDemoApp</Link>
+                {/* 🔹 Ya no usamos base, porque Vite maneja el prefijo */}
+                <Link to="/dashboard">BancoDemoApp</Link>
             </h1>
             <nav>
-                <Link to={`${base}/dashboard`} className="element">Dashboard</Link>
-                <Link to={`${base}/transferencia`} className="element">Transferir</Link>
-                <Link to={`${base}/historial`} className="element">Historial</Link>
+                <Link to="/dashboard" className="element">Dashboard</Link>
+                <Link to="/transferencia" className="element">Transferir</Link>
+                <Link to="/historial" className="element">Historial</Link>
 
                 <div
                     className="user-menu element"
@@ -40,7 +44,7 @@ export default function NavbarCliente() {
                     <button className="user-name">{nombre}</button>
                     {showMenu && (
                         <div className="dropdown-menu">
-                            <Link to={`${base}/perfil`}>Perfil</Link>
+                            <Link to="/perfil">Perfil</Link>
                             <button onClick={handleLogout}>Cerrar Sesión</button>
                         </div>
                     )}

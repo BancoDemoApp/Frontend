@@ -40,6 +40,16 @@ export default function CambiarContrasena() {
                 nueva_contrasena: '',
                 confirmar_contrasena: '',
             });
+
+            // 🔁 Redirección después de actualizar
+            setTimeout(() => {
+                if (import.meta.env.MODE === 'production') {
+                    window.location.href = '/bancodemo/perfil';
+                } else {
+                    window.location.href = '/perfil';
+                }
+            }, 1500);
+
         } catch (error) {
             setErrores('❌ Error al cambiar la contraseña. Verifica tus datos.');
         }
@@ -62,7 +72,13 @@ export default function CambiarContrasena() {
                                 <label><FaLock /> {field.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}</label>
                                 <div className="password-wrapper">
                                     <input
-                                        type={(field === 'contrasena_actual' ? mostrarActual : field === 'nueva_contrasena' ? mostrarNueva : mostrarConfirmar) ? 'text' : 'password'}
+                                        type={(field === 'contrasena_actual'
+                                            ? mostrarActual
+                                            : field === 'nueva_contrasena'
+                                                ? mostrarNueva
+                                                : mostrarConfirmar)
+                                            ? 'text'
+                                            : 'password'}
                                         name={field}
                                         value={form[field]}
                                         onChange={handleChange}
@@ -78,7 +94,11 @@ export default function CambiarContrasena() {
                                                     : setMostrarConfirmar(!mostrarConfirmar)
                                         }
                                     >
-                                        {(field === 'contrasena_actual' ? mostrarActual : field === 'nueva_contrasena' ? mostrarNueva : mostrarConfirmar)
+                                        {(field === 'contrasena_actual'
+                                            ? mostrarActual
+                                            : field === 'nueva_contrasena'
+                                                ? mostrarNueva
+                                                : mostrarConfirmar)
                                             ? <FaEyeSlash /> : <FaEye />}
                                     </span>
                                 </div>
