@@ -1,23 +1,24 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { logout } from '../api/api';
 
 export default function NavbarOperador() {
-    const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const nombre = localStorage.getItem('nombre') || 'Operador';
 
     // Base para rutas según entorno
     const base = import.meta.env.MODE === 'production' ? '/bancodemo' : '';
 
-    const cerrarSesion = async () => {
+    const handleLogout = async () => {
         try {
             await logout();
         } catch (error) {
             console.error('Error cerrando sesión:', error);
         } finally {
             localStorage.clear();
-            navigate(`${base}/login`);
+            window.location.href = import.meta.env.MODE === 'production'
+            ? '/bancodemo/'
+            : '/';
         }
     };
 
@@ -41,7 +42,7 @@ export default function NavbarOperador() {
                     {showMenu && (
                         <div className="dropdown-menu">
                             <Link to={`${base}/perfil`}>Perfil</Link>
-                            <button onClick={cerrarSesion}>Cerrar Sesión</button>
+                            <button onClick={handleLogout}>Cerrar Sesión</button>
                         </div>
                     )}
                 </div>

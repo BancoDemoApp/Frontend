@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { logout } from '../api/api';
 
 export default function NavbarCliente() {
-    const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const nombre = localStorage.getItem('nombre') || 'Cliente';
 
@@ -17,7 +16,9 @@ export default function NavbarCliente() {
             console.error('Error cerrando sesión:', error);
         } finally {
             localStorage.clear();
-            navigate(`${base}/login`);
+            window.location.href = import.meta.env.MODE === 'production'
+            ? '/bancodemo/'
+            : '/';
         }
     };
 
