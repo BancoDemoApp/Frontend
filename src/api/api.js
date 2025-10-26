@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/';
+
 // Detectar entorno
 const isLocal = window.location.hostname === 'localhost';
 
 const BASE_URL = isLocal
   ? 'http://localhost:8000/api/'
-  : '/api/'; // 🔹 Peticiones HTTPS en producción a través de Nginx
+  : API_URL; // 🔹 Peticiones HTTPS en producción a través de Nginx
 
 const api = axios.create({
   baseURL: BASE_URL,
